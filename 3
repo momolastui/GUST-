@@ -1,0 +1,60 @@
+class Doctor:
+    attributes:
+        doctorID
+        name
+        specialty
+        availability = empty list
+
+class Appointment:
+    attributes:
+        appointmentID
+        doctorID
+        patientName
+        dateTime
+
+class DoctorSchedulingSystem:
+    attributes:
+        doctorList = empty list
+        appointmentList = empty list
+
+    method addDoctor(doctor):
+        add doctor to doctorList
+
+    method scheduleAppointment(appointment):
+        for each doctor in doctorList:
+            if doctor.doctorID == appointment.doctorID:
+                if appointment.dateTime in doctor.availability:
+                    add appointment to appointmentList
+                    return "Appointment scheduled"
+                else:
+                    return "Doctor not available at this time"
+        return "Doctor not found"
+
+    method viewSchedule(doctorID):
+        schedule = empty list
+        for each appointment in appointmentList:
+            if appointment.doctorID == doctorID:
+                add appointment to schedule
+        return schedule if schedule is not empty else "No appointments scheduled"
+
+main program:
+    create an instance of DoctorSchedulingSystem
+
+    // Example of adding a doctor
+    create newDoctor
+        set newDoctor.doctorID = "D001"
+        set newDoctor.name = "Dr. Smith"
+        set newDoctor.specialty = "Cardiology"
+        set newDoctor.availability = ["2024-10-15 09:00", "2024-10-15 10:00"]
+    call DoctorSchedulingSystem.addDoctor(newDoctor)
+
+    // Example of scheduling an appointment
+    create newAppointment
+        set newAppointment.appointmentID = "A001"
+        set newAppointment.doctorID = "D001"
+        set newAppointment.patientName = "Jane Doe"
+        set newAppointment.dateTime = "2024-10-15 09:00"
+    output DoctorSchedulingSystem.scheduleAppointment(newAppointment)
+
+    // Example of viewing a doctor's schedule
+    output DoctorSchedulingSystem.viewSchedule("D001")

@@ -1,0 +1,91 @@
+class Patient:
+    attributes:
+        patientID
+        name
+        phone
+        email
+
+class Doctor:
+    attributes:
+        doctorID
+        name
+        specialty
+        availability = empty list
+
+class Appointment:
+    attributes:
+        appointmentID
+        patientID
+        doctorID
+        dateTime
+        status  // e.g., "scheduled", "cancelled"
+
+class AppointmentSystem:
+    attributes:
+        patientList = empty list
+        doctorList = empty list
+        appointmentList = empty list
+
+    method addPatient(patient):
+        add patient to patientList
+
+    method addDoctor(doctor):
+        add doctor to doctorList
+
+    method scheduleAppointment(patientID, doctorID, dateTime):
+        for each doctor in doctorList:
+            if doctor.doctorID == doctorID:
+                if dateTime in doctor.availability:
+                    create newAppointment
+                        set newAppointment.appointmentID = generateUniqueID()
+                        set newAppointment.patientID = patientID
+                        set newAppointment.doctorID = doctorID
+                        set newAppointment.dateTime = dateTime
+                        set newAppointment.status = "scheduled"
+                    add newAppointment to appointmentList
+                    return "Appointment scheduled"
+                else:
+                    return "Doctor not available at this time"
+        return "Doctor not found"
+
+    method cancelAppointment(appointmentID):
+        for each appointment in appointmentList:
+            if appointment.appointmentID == appointmentID:
+                appointment.status = "cancelled"
+                return "Appointment cancelled"
+        return "Appointment not found"
+
+    method viewAppointments(patientID):
+        schedule = empty list
+        for each appointment in appointmentList:
+            if appointment.patientID == patientID:
+                add appointment to schedule
+        return schedule if schedule is not empty else "No appointments found"
+
+main program:
+    create an instance of AppointmentSystem
+
+    // Example of adding patients
+    create patient1
+        set patient1.patientID = "P001"
+        set patient1.name = "Jane Doe"
+        set patient1.phone = "123-456-7890"
+        set patient1.email = "jane@example.com"
+    call AppointmentSystem.addPatient(patient1)
+
+    // Example of adding doctors
+    create doctor1
+        set doctor1.doctorID = "D001"
+        set doctor1.name = "Dr. Smith"
+        set doctor1.specialty = "Cardiology"
+        set doctor1.availability = ["2024-10-15 09:00", "2024-10-15 10:00"]
+    call AppointmentSystem.addDoctor(doctor1)
+
+    // Example of scheduling an appointment
+    output AppointmentSystem.scheduleAppointment("P001", "D001", "2024-10-15 09:00")
+
+    // Example of viewing a patient's appointments
+    output AppointmentSystem.viewAppointments("P001")
+
+    // Example of cancelling an appointment
+    output AppointmentSystem.cancelAppointment("A001")  // Replace "A001" with the actual appointment ID

@@ -1,0 +1,89 @@
+class Case:
+    attributes:
+        caseID
+        patientName
+        age
+        gender
+        medicalHistory
+        diagnosis
+        treatmentPlan
+
+class CaseStorageSystem:
+    attributes:
+        caseList = empty list
+
+    method addCase(case):
+        add case to caseList
+
+    method queryCase(caseID):
+        for each case in caseList:
+            if case.caseID == caseID:
+                return case
+        return "Case not found"
+
+    method deleteCase(caseID):
+        for each case in caseList:
+            if case.caseID == caseID:
+                remove case from caseList
+                return "Case deleted"
+        return "Case not found"
+
+    method updateCase(caseID, updatedCase):
+        for index, case in enumerate(caseList):
+            if case.caseID == caseID:
+                caseList[index] = updatedCase
+                return "Case updated"
+        return "Case not found"
+
+    method saveToFile(filename):
+        open file with filename
+        for each case in caseList:
+            write case to file
+        close file
+        return "Data saved successfully"
+
+    method loadFromFile(filename):
+        open file with filename
+        clear caseList
+        for each line in file:
+            create new case from line data
+            add new case to caseList
+        close file
+        return "Data loaded successfully"
+
+main program:
+    create an instance of CaseStorageSystem
+
+    // Example of adding a case
+    create newCase
+        set newCase.caseID = "001"
+        set newCase.patientName = "John Doe"
+        set newCase.age = 30
+        set newCase.gender = "Male"
+        set newCase.medicalHistory = "None"
+        set newCase.diagnosis = "Flu"
+        set newCase.treatmentPlan = "Rest, drink plenty of fluids"
+    call CaseStorageSystem.addCase(newCase)
+
+    // Example of querying a case
+    output CaseStorageSystem.queryCase("001")
+
+    // Example of updating a case
+    create updatedCase
+        set updatedCase.caseID = "001"
+        set updatedCase.patientName = "John Doe"
+        set updatedCase.age = 30
+        set updatedCase.gender = "Male"
+        set updatedCase.medicalHistory = "Allergy"
+        set updatedCase.diagnosis = "Flu"
+        set updatedCase.treatmentPlan = "Rest, drink fluids, antihistamines"
+    output CaseStorageSystem.updateCase("001", updatedCase)
+
+    // Example of deleting a case
+    output CaseStorageSystem.deleteCase("001")
+
+    // Example of saving data to a file
+    output CaseStorageSystem.saveToFile("cases.txt")
+
+    // Example of loading data from a file
+    output CaseStorageSystem.loadFromFile("cases.txt")

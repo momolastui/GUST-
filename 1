@@ -1,0 +1,23 @@
+#医患信息登记系统
+
+def register_patient():
+    print("欢迎使用医患信息登记系统")
+    
+    # 获取患者信息
+    patient_name = input("请输入患者姓名: ")
+    age = input("请输入患者年龄: ")
+    gender = input("请输入患者性别: ")
+    symptom = input("请输入患者病症: ")
+    
+    # 获取医生信息
+    doctor_name = input("请输入医生姓名: ")
+    
+    # 打印信息
+    print("\n登记信息如下:")
+    print(f"患者姓名: {patient_name}")
+    print(f"患者年龄: {age}")
+    print(f"患者性别: {gender}")
+    print(f"患者病症: {symptom}")
+    print(f"主治医生: {doctor_name}")
+
+# 调用函数

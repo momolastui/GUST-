@@ -1,1 +1,66 @@
+class Drug:
+    attributes:
+        drugID
+        name
+        dosage
+        manufacturer
+        expirationDate
+        stockQuantity
+
+class DrugRegistrationSystem:
+    attributes:
+        drugList = empty list
+
+    method addDrug(drug):
+        if drug not in drugList:
+            add drug to drugList
+            return "Drug registered successfully"
+        else:
+            return "Drug already exists"
+
+    method viewDrugs():
+        return drugList if drugList is not empty else "No drugs registered"
+
+    method updateDrug(drugID, updatedDrug):
+        for index, drug in enumerate(drugList):
+            if drug.drugID == drugID:
+                drugList[index] = updatedDrug
+                return "Drug updated successfully"
+        return "Drug not found"
+
+    method deleteDrug(drugID):
+        for index, drug in enumerate(drugList):
+            if drug.drugID == drugID:
+                remove drug from drugList
+                return "Drug deleted successfully"
+        return "Drug not found"
+
+main program:
+    create an instance of DrugRegistrationSystem
+
+    // Example of adding a drug
+    create newDrug
+        set newDrug.drugID = "D001"
+        set newDrug.name = "Aspirin"
+        set newDrug.dosage = "500mg"
+        set newDrug.manufacturer = "Pharma Inc."
+        set newDrug.expirationDate = "2025-12-31"
+        set newDrug.stockQuantity = 100
+    output DrugRegistrationSystem.addDrug(newDrug)
+
+    // Example of viewing all drugs
+    output DrugRegistrationSystem.viewDrugs()
+
+    // Example of updating a drug
+    create updatedDrug
+        set updatedDrug.drugID = "D001"
+        set updatedDrug.name = "Aspirin"
+        set updatedDrug.dosage = "1000mg"
+        set updatedDrug.manufacturer = "Pharma Inc."
+        set updatedDrug.expirationDate = "2026-12-31"
+        set updatedDrug.stockQuantity = 80
+    output DrugRegistrationSystem.updateDrug("D001", updatedDrug)
+
+    // Example of deleting a drug
+    output DrugRegistrationSystem.deleteDrug("D001")
 

@@ -1,0 +1,99 @@
+class Patient:
+    attributes:
+        patientID
+        name
+        age
+        gender
+        medicalHistory = empty list
+
+class Appointment:
+    attributes:
+        appointmentID
+        doctorID
+        patientID
+        dateTime
+
+class MedicalRecord:
+    attributes:
+        recordID
+        patientID
+        doctorID
+        diagnosis
+        treatmentPlan
+        date
+
+class Doctor:
+    attributes:
+        doctorID
+        name
+        specialty
+
+class DoctorDashboard:
+    attributes:
+        doctor
+        appointmentList = empty list
+        patientList = empty list
+        medicalRecordList = empty list
+
+    method viewAppointments():
+        schedule = empty list
+        for each appointment in appointmentList:
+            if appointment.doctorID == doctor.doctorID:
+                add appointment to schedule
+        return schedule if schedule is not empty else "No appointments scheduled"
+
+    method viewPatients():
+        return patientList if patientList is not empty else "No patients available"
+
+    method viewMedicalRecords(patientID):
+        records = empty list
+        for each record in medicalRecordList:
+            if record.patientID == patientID:
+                add record to records
+        return records if records is not empty else "No medical records found"
+
+main program:
+    create an instance of DoctorDashboard
+    set DoctorDashboard.doctor = Doctor with ID "D001", name "Dr. Smith"
+
+    // Example of adding patients
+    create patient1
+        set patient1.patientID = "P001"
+        set patient1.name = "Jane Doe"
+        set patient1.age = 30
+        set patient1.gender = "Female"
+    add patient1 to DoctorDashboard.patientList
+
+    create patient2
+        set patient2.patientID = "P002"
+        set patient2.name = "John Doe"
+        set patient2.age = 40
+        set patient2.gender = "Male"
+    add patient2 to DoctorDashboard.patientList
+
+    // Example of adding appointments
+    create appointment1
+        set appointment1.appointmentID = "A001"
+        set appointment1.doctorID = "D001"
+        set appointment1.patientID = "P001"
+        set appointment1.dateTime = "2024-10-15 09:00"
+    add appointment1 to DoctorDashboard.appointmentList
+
+    // Example of adding medical records
+    create record1
+        set record1.recordID = "R001"
+        set record1.patientID = "P001"
+        set record1.doctorID = "D001"
+        set record1.diagnosis = "Flu"
+        set record1.treatmentPlan = "Rest and hydration"
+        set record1.date = "2024-10-15"
+    add record1 to DoctorDashboard.medicalRecordList
+
+    // View appointments
+    output DoctorDashboard.viewAppointments()
+
+    // View patient list
+    output DoctorDashboard.viewPatients()
+
+    // View medical records for a specific patient
+    output DoctorDashboard.viewMedicalRecords("P001")

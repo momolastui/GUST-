@@ -1,0 +1,54 @@
+Start
+
+Define user_list = empty list
+
+Function register_user(name, age, gender, contact):
+    user_info = { "Name": name, "Age": age, "Gender": gender, "Contact": contact }
+    Add user_info to user_list
+    Output "Registration successful!"
+
+Function query_user(name):
+    For each user in user_list:
+        If user["Name"] == name:
+            Output user information
+            Return
+    Output "User not found!"
+
+Function register_visit(name, symptoms):
+    For each user in user_list:
+        If user["Name"] == name:
+            user["Symptoms"] = symptoms
+            Output "Visit registered successfully!"
+            Return
+    Output "User not found!"
+
+Main program:
+    Loop:
+        Output "1. Register User"
+        Output "2. Query User"
+        Output "3. Register Visit"
+        Output "4. Exit"
+        
+        choice = Input("Please select an option: ")
+        
+        If choice == "1":
+            name = Input("Please enter name: ")
+            age = Input("Please enter age: ")
+            gender = Input("Please enter gender: ")
+            contact = Input("Please enter contact: ")
+            register_user(name, age, gender, contact)
+        
+        If choice == "2":
+            name = Input("Please enter name: ")
+            query_user(name)
+        
+        If choice == "3":
+            name = Input("Please enter name: ")
+            symptoms = Input("Please enter symptoms: ")
+            register_visit(name, symptoms)
+        
+        If choice == "4":
+            Output "Exiting the system"
+            Exit
+
+End

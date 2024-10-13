@@ -1,23 +1,66 @@
 #医患信息登记系统
 
+def validate_age(age):
+    """验证年龄是否为有效的数字"""
+    while not age.isdigit():
+        age = input("无效输入，请输入数字形式的年龄: ")
+    return age
+
+def validate_gender(gender):
+    """验证性别是否为有效输入"""
+    while gender not in ['男', '女']:
+        gender = input("无效输入，请输入 '男' 或 '女': ")
+    return gender
+
 def register_patient():
     print("欢迎使用医患信息登记系统")
-    
-    # 获取患者信息
-    patient_name = input("请输入患者姓名: ")
-    age = input("请输入患者年龄: ")
-    gender = input("请输入患者性别: ")
-    symptom = input("请输入患者病症: ")
-    
-    # 获取医生信息
-    doctor_name = input("请输入医生姓名: ")
-    
-    # 打印信息
-    print("\n登记信息如下:")
-    print(f"患者姓名: {patient_name}")
-    print(f"患者年龄: {age}")
-    print(f"患者性别: {gender}")
-    print(f"患者病症: {symptom}")
-    print(f"主治医生: {doctor_name}")
+
+    patients = []  # 存储所有登记的患者信息
+
+    while True:
+        # 获取患者信息
+        patient_name = input("请输入患者姓名: ")
+        age = input("请输入患者年龄: ")
+        age = validate_age(age)  # 验证年龄输入
+        gender = input("请输入患者性别 (男/女): ")
+        gender = validate_gender(gender)  # 验证性别输入
+        symptom = input("请输入患者病症: ")
+
+        # 获取医生信息
+        doctor_name = input("请输入医生姓名: ")
+
+        # 保存信息到字典
+        patient_info = {
+            "姓名": patient_name,
+            "年龄": age,
+            "性别": gender,
+            "病症": symptom,
+            "主治医生": doctor_name
+        }
+        patients.append(patient_info)
+
+        # 打印信息
+        print("\n登记信息如下:")
+        print(f"患者姓名: {patient_name}")
+        print(f"患者年龄: {age}")
+        print(f"患者性别: {gender}")
+        print(f"患者病症: {symptom}")
+        print(f"主治医生: {doctor_name}")
+        print("\n登记成功！")
+
+        # 询问是否继续登记
+        continue_register = input("是否继续登记其他患者? (是/否): ")
+        if continue_register.lower() != "是":
+            break
+
+    # 打印所有登记的患者信息
+    print("\n所有患者登记信息如下:")
+    for index, patient in enumerate(patients, 1):
+        print(f"\n患者 {index}:")
+        for key, value in patient.items():
+            print(f"{key}: {value}")
+
+    print("\n感谢使用医患信息登记系统，再见！")
 
 # 调用函数
+register_patient()

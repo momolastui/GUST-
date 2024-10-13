@@ -1,0 +1,55 @@
+Start
+
+Define patient_list = empty list
+
+Function register_patient(name, age, gender, contact, symptoms):
+    patient_info = { "Name": name, "Age": age, "Gender": gender, "Contact": contact, "Symptoms": symptoms }
+    Add patient_info to patient_list
+    Output "Patient registration successful!"
+
+Function query_patient(name):
+    For each patient in patient_list:
+        If patient["Name"] == name:
+            Output patient information
+            Return
+    Output "Patient not found!"
+
+Function update_visit_info(name, new_symptoms):
+    For each patient in patient_list:
+        If patient["Name"] == name:
+            patient["Symptoms"] = new_symptoms
+            Output "Visit information updated successfully!"
+            Return
+    Output "Patient not found!"
+
+Main program:
+    Loop:
+        Output "1. Register Patient"
+        Output "2. Query Patient"
+        Output "3. Update Visit Information"
+        Output "4. Exit"
+        
+        choice = Input("Please select an option: ")
+        
+        If choice == "1":
+            name = Input("Please enter name: ")
+            age = Input("Please enter age: ")
+            gender = Input("Please enter gender: ")
+            contact = Input("Please enter contact: ")
+            symptoms = Input("Please enter symptoms: ")
+            register_patient(name, age, gender, contact, symptoms)
+        
+        If choice == "2":
+            name = Input("Please enter name: ")
+            query_patient(name)
+        
+        If choice == "3":
+            name = Input("Please enter name: ")
+            new_symptoms = Input("Please enter new symptoms: ")
+            update_visit_info(name, new_symptoms)
+        
+        If choice == "4":
+            Output "Exiting the system"
+            Exit
+
+End
